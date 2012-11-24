@@ -17,3 +17,8 @@
 @include sencha-msgbox;
 
 // Your custom code goes here...
+.x-image-header-scroller {
+	.x-headerview {
+		background-color: red;
+	}
+}

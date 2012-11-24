@@ -1,7 +1,7 @@
 //<debug>
 Ext.Loader.setPath({
     'Ext': 'touch/src',
-    'imageheaderscroller': 'app'
+    'imageheaderscroller': 'app',
     'Ext.ux':   'ux'
 });
 //</debug>
