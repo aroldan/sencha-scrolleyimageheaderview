@@ -19,6 +19,8 @@
 // Your custom code goes here...
 .x-image-header-scroller {
 	.x-headerview {
-		background-color: red;
+		background-image: url("/resources/images/cocktail.jpg");
+		background-size: cover;
+		background-position: 50% 100%;
 	}
 }

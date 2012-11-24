@@ -23,10 +23,19 @@ Ext.define 'Ext.ux.ImageHeaderScrollerView',
         scroller.on 'scroll', @onScroll, @
 
         window.cx = @
-        #console.log @getScroller()
 
     onScroll: (scroller, x, y) ->
-        console.log "Scrolled to #{x}, #{y}"
+        #console.log "Scrolled to #{x}, #{y}"
+        topContentSize = @config.topContentSize
+
+        pct = 100 + (y / @headerView.getSize().height) * 15;
+
+        baseHeaderStyleStr = "margin-top:-#{2*topContentSize}px;"
+        backgroundStyleStr = "background-position:50% #{pct}%;"
+
+        styleStr = baseHeaderStyleStr + backgroundStyleStr
+
+        @headerView.setStyle(baseHeaderStyleStr + backgroundStyleStr)
 
     onMaxPositionChange: (scroller, maxPosition, opts) ->
         #console.log "max pos: #{maxPosition}"
@@ -43,8 +52,8 @@ Ext.define 'Ext.ux.ImageHeaderScrollerView',
         topContentSize = @config.topContentSize
 
         headerView = Ext.create 'Ext.Container', Ext.merge {},
-            height: topContentSize * 2
-            style: "margin-top:-#{topContentSize}px"
+            height: topContentSize * 3
+            style: "margin-top:-#{2*topContentSize}px"
         ,
             @config.header
 

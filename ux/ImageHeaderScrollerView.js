@@ -22,7 +22,13 @@
       return window.cx = this;
     },
     onScroll: function(scroller, x, y) {
-      return console.log("Scrolled to " + x + ", " + y);
+      var backgroundStyleStr, baseHeaderStyleStr, pct, styleStr, topContentSize;
+      topContentSize = this.config.topContentSize;
+      pct = 100 + (y / this.headerView.getSize().height) * 15;
+      baseHeaderStyleStr = "margin-top:-" + (2 * topContentSize) + "px;";
+      backgroundStyleStr = "background-position:50% " + pct + "%;";
+      styleStr = baseHeaderStyleStr + backgroundStyleStr;
+      return this.headerView.setStyle(baseHeaderStyleStr + backgroundStyleStr);
     },
     onMaxPositionChange: function(scroller, maxPosition, opts) {
       return console.log(maxPosition);
@@ -39,8 +45,8 @@
       var headerView, topContentSize;
       topContentSize = this.config.topContentSize;
       headerView = Ext.create('Ext.Container', Ext.merge({}, {
-        height: topContentSize * 2,
-        style: "margin-top:-" + topContentSize + "px"
+        height: topContentSize * 3,
+        style: "margin-top:-" + (2 * topContentSize) + "px"
       }, this.config.header));
       headerView.addCls('x-headerview');
       return headerView;
