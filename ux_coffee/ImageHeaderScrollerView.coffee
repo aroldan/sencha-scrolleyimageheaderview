@@ -10,7 +10,6 @@ Ext.define 'Ext.ux.ImageHeaderScrollerView',
 
     initialize: ->
         @callParent()
-        console.log @config
 
         @addCls('x-image-header-scroller')
 
@@ -29,7 +28,7 @@ Ext.define 'Ext.ux.ImageHeaderScrollerView',
         #console.log "Scrolled to #{x}, #{y}"
         topContentSize = @config.topContentSize
 
-        pct = 100 + (y / @headerView.getSize().height) * 15;
+        pct = 100 + (y / @headerView.getSize().height) * 50;
 
         baseHeaderStyleStr = "margin-top:-#{2*topContentSize}px;"
         backgroundStyleStr = "background-position:50% #{pct}%;"
@@ -38,23 +37,20 @@ Ext.define 'Ext.ux.ImageHeaderScrollerView',
 
         @headerView.setStyle(baseHeaderStyleStr + backgroundStyleStr)
 
-    onMaxPositionChange: (scroller, maxPosition, opts) ->
-        #console.log "max pos: #{maxPosition}"
-        console.log maxPosition
-
     createContentView: ->
         topContentSize = @config.topContentSize
         gradientStart = @config.gradientStart
 
         contentView = Ext.create 'Ext.Container', Ext.merge {},
-            items: @config.contentItems
+            layout: 'vbox'
+            scrollable: false
             style: """
-            color: red;
             margin-top: #{topContentSize-gradientStart}px;
             padding-top: #{gradientStart}px;
             background-image: -webkit-linear-gradient(top, rgba(239, 239, 239, 0) 0px, rgba(239, 239, 239,1) #{gradientStart}px);
-
             """
+            items: @config.contentItems
+
 
         contentView.addCls 'x-contentview'
         return contentView
@@ -65,6 +61,7 @@ Ext.define 'Ext.ux.ImageHeaderScrollerView',
         headerView = Ext.create 'Ext.Container', Ext.merge {},
             height: topContentSize * 3
             style: "margin-top:-#{2*topContentSize}px"
+            scrollable: false
         ,
             @config.header
 
