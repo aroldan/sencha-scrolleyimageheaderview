@@ -5,6 +5,7 @@ Ext.define 'Ext.ux.ImageHeaderScrollerView',
     config:
         layout: 'fit'
         topContentSize: 115
+        gradientStart: 60
         scrollable: true
 
     initialize: ->
@@ -43,10 +44,20 @@ Ext.define 'Ext.ux.ImageHeaderScrollerView',
 
     createContentView: ->
         topContentSize = @config.topContentSize
+        gradientStart = @config.gradientStart
 
         contentView = Ext.create 'Ext.Container', Ext.merge {},
             items: @config.contentItems
-            style: "margin-top: #{topContentSize}px"
+            style: """
+            color: red;
+            margin-top: #{topContentSize-gradientStart}px;
+            padding-top: #{gradientStart}px;
+            background-image: -webkit-linear-gradient(top, rgba(239, 239, 239, 0) 0px, rgba(239, 239, 239,1) #{gradientStart}px);
+
+            """
+
+        contentView.addCls 'x-contentview'
+        return contentView
 
     createHeaderView: ->
         topContentSize = @config.topContentSize

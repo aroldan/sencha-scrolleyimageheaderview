@@ -6,6 +6,7 @@
     config: {
       layout: 'fit',
       topContentSize: 115,
+      gradientStart: 60,
       scrollable: true
     },
     initialize: function() {
@@ -34,12 +35,15 @@
       return console.log(maxPosition);
     },
     createContentView: function() {
-      var contentView, topContentSize;
+      var contentView, gradientStart, topContentSize;
       topContentSize = this.config.topContentSize;
-      return contentView = Ext.create('Ext.Container', Ext.merge({}, {
+      gradientStart = this.config.gradientStart;
+      contentView = Ext.create('Ext.Container', Ext.merge({}, {
         items: this.config.contentItems,
-        style: "margin-top: " + topContentSize + "px"
+        style: "color: red;\nmargin-top: " + (topContentSize - gradientStart) + "px;\npadding-top: " + gradientStart + "px;\nbackground-image: -webkit-linear-gradient(top, rgba(239, 239, 239, 0) 0px, rgba(239, 239, 239,1) " + gradientStart + "px);\n"
       }));
+      contentView.addCls('x-contentview');
+      return contentView;
     },
     createHeaderView: function() {
       var headerView, topContentSize;
